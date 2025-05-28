@@ -3,7 +3,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 require('dotenv').config();
-const { createUserTable } = require('./models/userModel');
+const { createUserTable } = require('./Models/userModel');
 const app = express();
 const PORT = process.env.PORT || 5000;
 // Middlewares
@@ -34,7 +34,7 @@ app.use('/user', userRoutes);
 // app.use('/', userRoutes);
 // Schema creation
 createUserTable();
-const { createFoodTable } = require('./models/foodModel');
+const { createFoodTable } = require('./Models/foodModel');
 createFoodTable();
 // Call this after setting up middlewares+_
 // Server
