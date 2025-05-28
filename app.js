@@ -5,6 +5,7 @@ const session = require('express-session');
 require('dotenv').config();
 
 const { createUserTable } = require('./models/userModel');
+
 const { createFoodTable } = require('./models/foodModel');
 
 const adminRoutes = require('./routes/adminRoutes');
