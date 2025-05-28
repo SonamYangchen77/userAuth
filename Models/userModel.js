@@ -1,3 +1,7 @@
+const fs = require('fs');
+console.log('Files in config:', fs.readdirSync('./config'));
+console.log('Current working directory:', process.cwd());
+
 const db = require('../config/db');
 
 
