@@ -1,6 +1,5 @@
 const db = require('../config/db');
 
-
 const createFoodTable = async () => {
   try {
     await db.none(`

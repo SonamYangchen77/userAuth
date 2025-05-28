@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require('../config/db');
+
+
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 const saltRounds = 10;
