@@ -3,9 +3,17 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 require('dotenv').config();
-const { createUserTable } = require('./Models/userModel');
+
+const { createUserTable } = require('./models/userModel');
+const { createFoodTable } = require('./models/foodModel');
+
+const adminRoutes = require('./routes/adminRoutes');
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
+
 // Middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -16,30 +24,21 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }));
+
 // View engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-// Routes
-// const adminRoutes = require('./routes/adminRoutes');
-const authRoutes = require('./routes/authRoutes');
-const adminRoutes = require('./routes/adminRoutes');
-const userRoutes = require('./routes/userRoutes');
 
-// const userRoutes = require('./routes/userRoutes');
-app.use('/', authRoutes);
+// Routes
+app.use('/', authRoutes); // Only use once
 app.use('/admin', adminRoutes);
 app.use('/user', userRoutes);
 
-// app.use('/', adminRoutes);
-// app.use('/', userRoutes);
 // Schema creation
 createUserTable();
-const { createFoodTable } = require('./Models/foodModel');
 createFoodTable();
-// Call this after setting up middlewares+_
+
 // Server
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
-
-
