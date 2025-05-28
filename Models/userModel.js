@@ -1,9 +1,15 @@
 const fs = require('fs');
-console.log('Files in config:', fs.readdirSync('./config'));
-console.log('Current working directory:', process.cwd());
+const path = require('path');
+
+// Safe check for config directory (for dev/debugging only)
+const configPath = path.join(__dirname, '../config');
+if (fs.existsSync(configPath)) {
+  console.log('Files in config:', fs.readdirSync(configPath));
+} else {
+  console.warn(`⚠️ Config directory not found at ${configPath} — skipping file listing`);
+}
 
 const db = require('../config/db');
-
 
 // Create user table if not exists
 const createUserTable = async () => {
@@ -27,9 +33,6 @@ const createUserTable = async () => {
   }
 };
 
-
 module.exports = {
   createUserTable
 };
-
-
